@@ -24,5 +24,7 @@ public class UserDTO {
 
     private int englishLevel;
 
+    private Double score;
+
     private UserRole role;
 }

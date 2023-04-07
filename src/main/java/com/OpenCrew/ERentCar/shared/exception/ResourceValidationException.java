@@ -5,7 +5,7 @@ import javax.validation.ConstraintViolation;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ResourceValidationException extends RuntimeException{
+/*public class ResourceValidationException extends RuntimeException{
     public ResourceValidationException(){
         super();
     }
@@ -22,4 +22,4 @@ public class ResourceValidationException extends RuntimeException{
     public ResourceValidationException(String resourceName, String message) {
         super(String.format("No all constraints satisfied for %s: %s", resourceName, message));
     }
-}
+}*/
