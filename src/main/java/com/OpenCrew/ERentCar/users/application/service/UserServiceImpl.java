@@ -10,8 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.OpenCrew.ERentCar.shared.exception.ResourceNotFoundException;
-import com.OpenCrew.ERentCar.shared.exception.ResourceValidationException;
+/*import com.OpenCrew.ERentCar.shared.exception.ResourceNotFoundException;
+import com.OpenCrew.ERentCar.shared.exception.ResourceValidationException;*/
+import com.OpenCrew.ERentCar.shared.exception.aber.ResourceNotFound;
+import com.OpenCrew.ERentCar.shared.exception.aber.BadRequestException;
 import com.OpenCrew.ERentCar.users.domain.model.User;
 import com.OpenCrew.ERentCar.users.domain.repository.UserRepository;
 import com.OpenCrew.ERentCar.users.domain.service.UserService;
@@ -29,7 +31,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getById(Long id) {
         return this.userRepository.findById(id)
-        .orElseThrow(()->new ResourceNotFoundException("USER",id));
+        .orElseThrow(()->new ResourceNotFound("USER",id));
     }
 
     /*@Override
@@ -47,12 +49,11 @@ public class UserServiceImpl implements UserService{
     public User registerUser(User user) {
         Set<ConstraintViolation<User>>violations=validator.validate(user);
         if(!violations.isEmpty()){
-            throw new ResourceValidationException("USER",violations);
+            throw new BadRequestException("USER",violations);
         }
         if(this.userRepository.findByEmail(user.getEmail()).isPresent()){
             /*throw new BadRequestException("Email already in use");*/
         }
-        
         return this.userRepository.save(user);
     }
 
